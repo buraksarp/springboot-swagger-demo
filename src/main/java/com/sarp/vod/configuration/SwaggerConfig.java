@@ -20,27 +20,25 @@ import static springfox.documentation.builders.PathSelectors.regex;
 public class SwaggerConfig {
 
 	@Bean
-    public Docket contactApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("vod")
-                .apiInfo(apiInfo())
-                .select()
-                .paths(categoryPaths())
-                .build();
-    }
-	
+	public Docket contactApi() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.groupName("vod")
+				.apiInfo(apiInfo())
+				.select()
+				.paths(categoryPaths()).build();
+	}
+
 	private Predicate<String> categoryPaths() {
-        return regex("/vod.*");
-    }
-     
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Video on Demand Demo Application")
-                .description("Video on Demand Demo for Swagger Usage")
-                .termsOfServiceUrl("")
-                .license("Apache License Version 2.0")
-                .licenseUrl("")
-                .version("1.0")
-                .build();
-    }
+		return regex("/vod.*");
+	}
+
+	private ApiInfo apiInfo() {
+		return new ApiInfoBuilder()
+				.title("Video on Demand Demo Application")
+				.description("Video on Demand Demo for Swagger Usage")
+				.termsOfServiceUrl("")
+				.license("Apache License Version 2.0")
+				.licenseUrl("")
+				.version("1.0").build();
+	}
 }
