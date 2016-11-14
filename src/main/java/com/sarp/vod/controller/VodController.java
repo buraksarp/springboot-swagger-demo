@@ -15,6 +15,7 @@ import com.sarp.vod.domain.Video;
 import com.sarp.vod.domain.VideoRepository;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
 
@@ -22,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 @RequestMapping("/vod")
 public class VodController {
 
-	private VideoRepository videoRepository;
+	private final VideoRepository videoRepository;
 
 	@Autowired
 	public VodController(VideoRepository videoRepository) {
@@ -61,7 +62,7 @@ public class VodController {
 	@ApiResponses({
 	    @ApiResponse(code = 200, message ="DELETED", response = HttpStatus.class)})
 	@RequestMapping(method = RequestMethod.DELETE)
-	public ResponseEntity<HttpStatus> deleteVideo(@RequestBody Long id){
+	public ResponseEntity<HttpStatus> deleteVideo(@ApiParam("The id of the video") @RequestBody Long id){
 		videoRepository.delete(id);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
@@ -72,7 +73,7 @@ public class VodController {
 			@ApiResponse(code = 404, message = "NOT_FOUND"), 
 			@ApiResponse(code = 500, message = "FAILURE") })
 	@RequestMapping(value = "/{title}", method = RequestMethod.GET)
-	public ResponseEntity<List<Video>> getVideoByTitle(@PathVariable String title) {
+	public ResponseEntity<List<Video>> getVideoByTitle(@ApiParam("The title of the video") @PathVariable String title) {
 		return new ResponseEntity<List<Video>>(videoRepository.findByTitle(title),HttpStatus.OK);
 	}
 	
